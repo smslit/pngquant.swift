@@ -9,7 +9,6 @@
 #define PNGQuantBinding_h
 
 #import <Foundation/Foundation.h>
-#include <QD/ColorSyncDeprecated.h>
 #import "TargetConditionals.h"
 
 #if TARGET_OS_OSX
