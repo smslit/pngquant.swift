@@ -115,7 +115,7 @@ png_rgba_pixels_exit:
     return dataOut;
 }
 
--(NSData * _Nullable) quantizedImageData:(int)speed;
+-(NSData * _Nullable) quantizedImageData:(int)quality speed:(int)speed;
 {
     int _width = self.pngIntrinsicWidth;
     int _height = self.pngIntrinsicHeight;
@@ -126,6 +126,7 @@ png_rgba_pixels_exit:
     
     auto quantinizer = Quantinizer(pngSafeBuffer.getBuffer(), _width, _height);
     quantinizer.setSpeed(speed);
+    quantinizer.setQuality(quality, quality + 9);
     
     auto encoder = PNGEncoder();
     encoder.setTargetInternalBuffer();
@@ -145,7 +146,7 @@ png_rgba_pixels_exit:
     return dataOut;
 }
 
--(NSError * _Nullable) quantizedImageTo:(NSString * _Nonnull)path speed:(int) speed;
+-(NSError * _Nullable) quantizedImageTo:(NSString * _Nonnull)path quality:(int)quality speed:(int)speed;
 {
     int _width = self.pngIntrinsicWidth;
     int _height = self.pngIntrinsicHeight;
@@ -156,6 +157,7 @@ png_rgba_pixels_exit:
     
     auto quantinizer = Quantinizer(safeBuffer.getBuffer(), _width, _height);
     quantinizer.setSpeed(speed);
+    quantinizer.setQuality(quality, quality + 9);
     
     auto encoder = PNGEncoder();
     if (!encoder.setTargetFile([path UTF8String])) {

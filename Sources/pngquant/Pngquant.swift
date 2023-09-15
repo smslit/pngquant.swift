@@ -18,16 +18,16 @@ public extension PNGQuantImage {
      Compress **UIImage** with libpngquant to file at *url*
      - Throws **CannotCompressError**: if error occured while compressing
      */
-    func pngQuantData(at url: URL, speed: Int = 4) throws {
-        try pngQuantData(atPath: url.path, speed: speed)
+    func pngQuantData(at url: URL, quality: Int = 90, speed: Int = 4) throws {
+        try pngQuantData(atPath: url.path, quality: quality, speed: speed)
     }
     
     /**
      Compress **UIImage** with libpngquant to file at *path*
      - Throws **CannotCompressError**: if error occured while compressing
      */
-    func pngQuantData(atPath path: String, speed: Int = 4) throws {
-        if let error = self.quantizedImage(to: path, speed: Int32(speed)) {
+    func pngQuantData(atPath path: String, quality: Int = 90, speed: Int = 4) throws {
+        if let error = self.quantizedImage(to: path, quality: quality, speed: Int32(speed)) {
             throw error
         }
     }
@@ -36,8 +36,8 @@ public extension PNGQuantImage {
      Compress **UIImage** with libpngquant to **Data**
      - Throws **PNGQuantinizationError**: if error occured while compressing
      */
-    func pngQuantData(speed: Int = 4) throws -> Data {
-        guard let data = self.quantizedImageData(Int32(speed)) else {
+    func pngQuantData(quality: Int = 90, speed: Int = 4) throws -> Data {
+        guard let data = self.quantizedImageData(Int32(quality), Int32(speed)) else {
             throw PNGQuantinizationError()
         }
         return data

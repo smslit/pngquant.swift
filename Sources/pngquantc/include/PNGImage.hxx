@@ -9,21 +9,22 @@
 #define PNGQuantBinding_h
 
 #import <Foundation/Foundation.h>
+#include <QD/ColorSyncDeprecated.h>
 #import "TargetConditionals.h"
 
 #if TARGET_OS_OSX
 #import <AppKit/AppKit.h>
-#define PNGImage   NSImage
+#define PNGImage NSImage
 #else
 #import <UIKit/UIKit.h>
-#define PNGImage   UIImage
+#define PNGImage UIImage
 #endif
 
 @interface PNGImage (PngQuant)
 
--(NSData * _Nullable) pngRGBA:(int)speed;
--(NSData * _Nullable) quantizedImageData:(int)speed;
--(NSError * _Nullable) quantizedImageTo:(NSString * _Nonnull)path speed:(int) speed;
+- (NSData *_Nullable)pngRGBA:(int)speed;
+- (NSData *_Nullable)quantizedImageData:(int)quality speed:(int)speed;
+- (NSError *_Nullable)quantizedImageTo:(NSString *_Nonnull)path quality:(int)quality speed:(int)speed;
 
 @end
 
